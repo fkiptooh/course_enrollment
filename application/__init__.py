@@ -31,32 +31,38 @@ from application import routes
 from application import models
 
 
-class AdminView(ModelView):
-    def is_accessible(self):
-        return current_user.has_role('admin')
+# class AdminView(ModelView):
+#     def is_accessible(self):
+#         return current_user.has_role('admin')
 
-    def inaccessible_callback(self, name, **kwargs):
-        return redirect (url_for('signIn', next=request.url))
+#     def inaccessible_callback(self, name, **kwargs):
+#         return redirect (url_for('signIn', next=request.url))
 
-class HomeAdminView(AdminIndexView):
-    def is_accessible(self):
-        return current_user.has_role('admin')
+# class HomeAdminView(AdminIndexView):
+#     def is_accessible(self):
+#         return current_user.has_role('admin')
 
-    def inaccessible_callback(self, name, **kwargs):
-        return redirect (url_for('security.login', next=request.url))
+#     def inaccessible_callback(self, name, **kwargs):
+#         return redirect (url_for('security.login', next=request.url))
 
 
-admin = Admin(app, 'UTA_Enrollment Admin Dashboard', url='/admin',
-index_view=HomeAdminView(name='Home'))
+# admin = Admin(app, 'UTA_Enrollment Admin Dashboard', url='/admin',
+# index_view=HomeAdminView(name='Home'))
 
-# admin = Admin(app)
-
-admin.add_view(AdminView(models.User))
-admin.add_view(AdminView(Role))
-admin.add_view(AdminView(models.Course))
-admin.add_view(AdminView(models.Enrollment))
+admin = Admin(app)
+admin.add_view(ModelView(User))
+admin.add_view(ModelView(Role))
+admin.add_view(ModelView(models.Course))
+admin.add_view(ModelView(models.Enrollment))
 
 admin.add_link(MenuLink(name='Logout', category='', url='/logout'))
+
+# admin.add_view(AdminView(models.User))
+# admin.add_view(AdminView(Role))
+# admin.add_view(AdminView(models.Course))
+# admin.add_view(AdminView(models.Enrollment))
+
+# admin.add_link(MenuLink(name='Logout', category='', url='/logout'))
 
 # @app.before_first_request
 # def create_user():
