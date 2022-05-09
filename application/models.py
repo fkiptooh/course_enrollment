@@ -16,7 +16,7 @@ class User(db.Document, UserMixin):
     last_name   =   db.StringField( max_length=50 )
     email       =   db.StringField( max_length=30, unique=True )
     active = db.BooleanField(default=True)
-    fs_uniquifier = db.StringField(max_length=64, unique=True)
+#     fs_uniquifier = db.StringField(max_length=64, unique=True)
     confirmed_at = db.DateTimeField()
     password    =   db.StringField( )
     roles = db.ListField(db.ReferenceField(Role), default=[])
