@@ -1,7 +1,7 @@
 from flask import Flask
 from config import Config
 from flask_mongoengine import MongoEngine
-from flask_restx import Api
+# from flask_restx import Api
 from flask_admin import Admin
 from flask_admin import AdminIndexView
 from flask import redirect, url_for, request
@@ -12,7 +12,7 @@ from flask_admin.menu import MenuLink
 from flask_security import Security, current_user, MongoEngineUserDatastore, \
     auth_required
 
-api = Api()
+# api = Api()
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,7 +21,7 @@ security = Security()
 
 db = MongoEngine()
 db.init_app(app)
-api.init_app(app)
+# api.init_app(app)
 
 from application.models import User, Role
 app.user_datastore = MongoEngineUserDatastore(db, User, Role)
